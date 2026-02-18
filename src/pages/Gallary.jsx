@@ -59,12 +59,12 @@ export default function GalleryPage() {
           <div className="lg:col-span-1 bg-white rounded-3xl border border-gray-100 p-8 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <Landmark className="text-yellow-500" size={24} />
-              <h2 className="text-xl font-bold text-green-950 uppercase tracking-tight">Land Records</h2>
+              <h2 className="text-xl font-bold text-green-950 uppercase tracking-tight">CTS Number</h2>
             </div>
             <div className="space-y-4">
               {ctsDetails.map((item, idx) => (
                 <div key={idx} className="flex justify-between items-center p-4 bg-gray-50 rounded-2xl border border-gray-100">
-                  <span className="font-bold text-green-900">CTS No. {item.number}</span>
+                  <span className="font-bold text-green-900">{item.number}:</span>
                   <span className="text-gray-600 font-medium">{item.area}</span>
                 </div>
               ))}
