@@ -1,4 +1,4 @@
-import { Download, FileText, Video, ImageIcon, ArrowLeft } from "lucide-react";
+import { Download, FileText, Video, ImageIcon, ArrowLeft, MapPin, Landmark } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -9,6 +9,12 @@ export default function GalleryPage() {
     { name: "Mutation Entry Record", file: "/doc/doc3.pdf" },
     { name: "Record of Rights Document", file: "/doc/doc4.pdf" },
     { name: "Lonavala Property Information", file: "/doc/doc5.pdf" },
+  ];
+
+  const ctsDetails = [
+    { number: "110", area: "10 Acer 29 Guntha" },
+    { number: "115", area: "15 Guntha" },
+    { number: "111", area: "16 R" },
   ];
 
   const images = Array.from({ length: 17 }, (_, i) => `${i + 1}.jpeg`);
@@ -28,43 +34,74 @@ export default function GalleryPage() {
           <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tight">
             Project <span className="text-yellow-500 italic font-light">Resources</span>
           </h1>
-          <p className="text-green-100/70 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-green-100/70 max-w-2xl mx-auto text-lg leading-relaxed mb-8">
             Download official documentation, site photos, and HD project walkthroughs.
           </p>
+          
+          {/* GOOGLE MAPS LINK */}
+          <a 
+            href="https://maps.app.goo.gl/DpnUy2zemu6LJC6x7?g_st=aw" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-6 py-3 rounded-full backdrop-blur-md transition-all font-semibold"
+          >
+            <MapPin size={18} className="text-yellow-500" />
+            View on Google Maps
+          </a>
         </div>
       </header>
 
-      {/* ================= DOCUMENTS SECTION ================= */}
+      {/* ================= LAND DETAILS & DOCUMENTS ================= */}
       <section className="py-16 px-6 -mt-12 relative z-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-3 mb-8 ml-2">
-            <div className="h-8 w-1.5 bg-yellow-500 rounded-full"></div>
-            <h2 className="text-2xl font-bold text-green-950 uppercase tracking-widest">Legal Vault</h2>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* CTS NUMBERS CARD */}
+          <div className="lg:col-span-1 bg-white rounded-3xl border border-gray-100 p-8 shadow-xl">
+            <div className="flex items-center gap-3 mb-6">
+              <Landmark className="text-yellow-500" size={24} />
+              <h2 className="text-xl font-bold text-green-950 uppercase tracking-tight">Land Records</h2>
+            </div>
+            <div className="space-y-4">
+              {ctsDetails.map((item, idx) => (
+                <div key={idx} className="flex justify-between items-center p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                  <span className="font-bold text-green-900">CTS No. {item.number}</span>
+                  <span className="text-gray-600 font-medium">{item.area}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {documents.map((doc, i) => (
-              <div key={i} className="group bg-white rounded-3xl border border-gray-100 p-5 flex items-center justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div className="flex items-center gap-4">
-                  <div className="bg-green-50 text-green-900 p-4 rounded-2xl group-hover:bg-green-900 group-hover:text-yellow-400 transition-colors">
-                    <FileText size={24} />
+          {/* DOCUMENTS GRID */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-3 mb-8 ml-2">
+              <div className="h-8 w-1.5 bg-yellow-500 rounded-full"></div>
+              <h2 className="text-2xl font-bold text-green-950 uppercase tracking-widest">Legal Vault</h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {documents.map((doc, i) => (
+                <div key={i} className="group bg-white rounded-3xl border border-gray-100 p-5 flex items-center justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex items-center gap-4">
+                    <div className="bg-green-50 text-green-900 p-4 rounded-2xl group-hover:bg-green-900 group-hover:text-yellow-400 transition-colors">
+                      <FileText size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-green-900 leading-tight truncate w-32 md:w-full">{doc.name}</h3>
+                      <p className="text-xs text-gray-400 mt-1 uppercase font-semibold">Official PDF</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-bold text-green-900 leading-tight truncate w-40 md:w-full">{doc.name}</h3>
-                    <p className="text-xs text-gray-400 mt-1 uppercase font-semibold">Official PDF</p>
-                  </div>
+                  <a href={doc.file} download className="bg-gray-50 text-gray-400 hover:bg-yellow-500 hover:text-green-950 p-3 rounded-2xl transition-all active:scale-90 shadow-sm">
+                    <Download size={20} />
+                  </a>
                 </div>
-                <a href={doc.file} download className="bg-gray-50 text-gray-400 hover:bg-yellow-500 hover:text-green-950 p-3 rounded-2xl transition-all active:scale-90 shadow-sm">
-                  <Download size={20} />
-                </a>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ================= PHOTO GALLERY (WITH DOWNLOAD) ================= */}
-      <section className="py-10 px-6 bg-green-950">
+      {/* ================= PHOTO GALLERY ================= */}
+      <section className="py-20 px-6 bg-green-950">
         <div className="max-w-7xl mx-auto mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
            <div>
               <div className="flex items-center gap-2 mb-2">
@@ -104,43 +141,35 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* ================= VIDEO SECTION (WITH DOWNLOAD) ================= */}
+      {/* ================= VIDEO SECTION ================= */}
       <section className="py-24 px-6 bg-[#f8fafc]">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col items-center text-center mb-16">
+        <div className="max-w-7xl mx-auto text-center">
             <div className="inline-block bg-green-100 text-green-900 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
               HD Media
             </div>
-            <h2 className="text-4xl md:text-5xl font-black text-green-900 mb-6">Project Walkthrough</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-green-900 mb-8">Project Walkthrough</h2>
             
-            {/* Primary Video Download Button */}
-            <a 
-              href="/videos/project.mp4" 
-              download="Lonavala-Hills-Retreat-Video.mp4"
-              className="flex items-center gap-3 bg-green-900 text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:bg-yellow-500 hover:text-green-950 transition-all active:scale-95 group"
-            >
-              <Download size={22} className="group-hover:bounce" />
-              Download Full HD Video
-            </a>
-          </div>
-
-          <div className="max-w-5xl mx-auto">
-            <div className="relative bg-white rounded-[2.5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] p-4 md:p-8">
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-yellow-500/20 rounded-full blur-3xl -z-10"></div>
-              <div className="relative rounded-[2rem] overflow-hidden group shadow-inner ring-1 ring-gray-100">
-                <video
-                  controls
-                  className="w-full aspect-video block object-cover"
+            <div className="max-w-5xl mx-auto">
+              <div className="relative bg-white rounded-[2.5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] p-4 md:p-8">
+                <div className="relative rounded-[2rem] overflow-hidden group shadow-inner ring-1 ring-gray-100">
+                  <video controls className="w-full aspect-video block object-cover">
+                    <source src="/videos/project.mp4" type="video/mp4" />
+                  </video>
+                </div>
+              </div>
+              
+              <div className="mt-10">
+                <a 
+                  href="/videos/project.mp4" 
+                  download="Lonavala-Hills-Retreat-Video.mp4"
+                  className="inline-flex items-center gap-3 bg-green-900 text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:bg-yellow-500 hover:text-green-950 transition-all active:scale-95"
                 >
-                  <source src="/videos/project.mp4" type="video/mp4" />
-                </video>
+                  <Download size={22} /> Download Full HD Video
+                </a>
               </div>
             </div>
-          </div>
         </div>
       </section>
-
-
     </div>
   );
 }
