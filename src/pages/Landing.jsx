@@ -23,11 +23,7 @@ export default function Landing() {
       {/* ================= ABOUT SECTION (TOP) ================= */}
       <section id="about" className="pt-20 pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="flex justify-center mb-6">
-            <span className="bg-green-50 text-green-700 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-green-100">
-              Premium Plotted Development
-            </span>
-          </div>
+ 
           
           <h1 className="text-4xl md:text-6xl font-serif text-green-950 mb-6 leading-tight">
             Lonavala Hills Retreat <br/>
@@ -38,13 +34,7 @@ export default function Landing() {
             Experience the perfect blend of luxury and nature. Our premium plots offer breathtaking views of the Sahyadri mountains, providing a peaceful sanctuary for you and your family to build your dream vacation home.
           </p>
           
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
-            {["Clear Title 7/12", "RERA Approved", "Gated Security", "2 Hrs from Mumbai"].map((item, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-sm font-semibold text-green-900">
-                <CheckCircle2 size={18} className="text-yellow-600" /> {item}
-              </div>
-            ))}
-          </div>
+     
         </div>
       </section>
 
@@ -95,7 +85,6 @@ export default function Landing() {
               <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
             </Link>
             
-            <p className="mt-4 text-gray-400 text-sm font-medium">Explore 7/12, RERA, and Site Photos</p>
           </div>
         </div>
       </section>
